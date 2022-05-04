@@ -1,0 +1,7 @@
+C:\Visual Studio - learning\Library\Library\obj\Debug\Library.csproj.AssemblyReference.cache
+C:\Visual Studio - learning\Library\Library\obj\Debug\Library.csproj.SuggestedBindingRedirects.cache
+C:\Visual Studio - learning\Library\Library\obj\Debug\Library.csproj.CoreCompileInputs.cache
+C:\Visual Studio - learning\Library\Library\bin\Debug\Library.exe
+C:\Visual Studio - learning\Library\Library\bin\Debug\Library.pdb
+C:\Visual Studio - learning\Library\Library\obj\Debug\Library.exe
+C:\Visual Studio - learning\Library\Library\obj\Debug\Library.pdb

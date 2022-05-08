@@ -10,8 +10,9 @@ namespace Library
     {
         static void Main(string[] args) 
         {
-            
-            Menu.StartUp();
+            var menu = new Menu();
+
+            menu.StartUp();
 
             Console.ReadLine();
 

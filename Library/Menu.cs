@@ -22,9 +22,15 @@ namespace Library
                 {
                     isLogged = true;
                     DisplayMenu();
-                    Console.Write("Select one of three options (enter 1, 2 or 3): ");
+                    Console.Write("Select one of the options: ");
                     var selectedOption = Console.ReadLine();
-                    OptionsMenu(selectedOption);
+
+                    if (!OptionsMenu(selectedOption))
+                    {
+                        isLogged = false;
+                        isLoginCorrect = false;
+                    };
+
                 }
                 else
                 {
@@ -33,7 +39,7 @@ namespace Library
                     isLoginCorrect = identity.Login();
                 }
             }
-            while (isLoginCorrect == false || isLogged == false);
+            while (isLogged == false);
 
 
         }
@@ -46,39 +52,60 @@ namespace Library
             Console.WriteLine("1.Book catalog");
             Console.WriteLine("2.Your borrowed books");
             Console.WriteLine("3.Returns");
+            Console.WriteLine("8.Sign Out");
 
         }
 
-        public void OptionsMenu(string selectedOption)
+        public bool OptionsMenu(string selectedOption)
         {
 
-           
 
-                if (selectedOption == "1")
-                {
-                    //TO BE DONE
-                    Console.WriteLine("Title");
-                    Console.WriteLine("Title2");
-                    Console.WriteLine("Title3");
-                    Console.ReadLine();
-                }
-                else if (selectedOption == "2")
-                {
-                    //TO BE DONE
-                    Console.WriteLine("Borrowed book");
-                }
-                else if (selectedOption == "3")
-                {
-                    //TO BE DONE
-                    Console.WriteLine("Return book");
 
-                }
-                else
+            if (selectedOption == "1")
+            {
+                //TO BE DONE
+                Console.Clear();
+                Console.WriteLine("Title");
+                Console.WriteLine("Title2");
+                Console.WriteLine("Title3");
+                Console.ReadLine();
+                return true;    
+            }
+            else if (selectedOption == "2")
+            {
+                //TO BE DONE
+                Console.Clear();
+                Console.WriteLine("Borrowed book");
+                return true;
+            }
+            else if (selectedOption == "3")
+            {
+                //TO BE DONE
+                Console.Clear();
+                Console.WriteLine("Return book");
+                return true;
+
+            }
+            else if (selectedOption == "8")
+
+            {
+                Console.Clear();
+                Console.WriteLine("You have been logged out.");
+                Console.Write("Press enter to log in again");
+                Console.ReadLine();
+                return false;
+                
+
+
+            }
+            else
                 {
+
                     Console.WriteLine("Enter correct number of options");
                     Console.Write("Select one of three options (enter 1, 2 or 3): ");
                     var selectedWrongOption = Console.ReadLine();
                     OptionsMenu(selectedWrongOption);
+                    return true;
                 }
          
            

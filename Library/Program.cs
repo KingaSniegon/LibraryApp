@@ -10,7 +10,7 @@ namespace Library
     {
         static void Main(string[] args) 
         {
-            var menu = new Menu();
+            var menu = new MenuService();
 
             menu.StartUp();
 

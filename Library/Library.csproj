@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Identity.cs" />
-    <Compile Include="Menu.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="IdentityService.cs" />
+    <Compile Include="MenuService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

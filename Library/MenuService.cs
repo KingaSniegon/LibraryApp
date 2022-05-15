@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    public class Menu
+    public class MenuService
     {
         public void StartUp()
         {
-            var identity = new Identity();
-            var isLoginCorrect = identity.Login();
+            var identity = new IdentityService();
+            var isLoginCorrect = identity.LogIn();
             var isLogged = false;
 
 
@@ -36,7 +36,7 @@ namespace Library
                 {
                     Console.Clear();
                     Console.WriteLine("Username or password is incorrect. Please enter your credentials again");
-                    isLoginCorrect = identity.Login();
+                    isLoginCorrect = identity.LogIn();
                 }
             }
             while (isLogged == false);

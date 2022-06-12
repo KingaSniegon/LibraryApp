@@ -18,12 +18,12 @@ namespace Library
 
         public User (string username, string password, string emailAddress, int phoneNumber, string firstName, string lastName)
         {
-           this.Username = username;
-           this.Password = password;
-           this.EmailAddress = emailAddress;
-           this.PhoneNumber = phoneNumber;
-           this.FirstName = firstName;
-           this.LastName = lastName;
+           Username = username;
+           Password = password;
+           EmailAddress = emailAddress;
+           PhoneNumber = phoneNumber;
+           FirstName = firstName;
+           LastName = lastName;
 
         }
         

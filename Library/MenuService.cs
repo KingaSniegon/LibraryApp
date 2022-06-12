@@ -65,9 +65,21 @@ namespace Library
             {
                 //TO BE DONE
                 Console.Clear();
-                Console.WriteLine("Title");
-                Console.WriteLine("Title2");
-                Console.WriteLine("Title3");
+
+
+                var database = new Database();
+                var listOfBooks = database.CreateListofBooks();
+
+                Console.WriteLine("ID".PadRight(3) + " | " + "Author first name".PadRight(20) + " | " + "Author last name".PadRight(20) + " | " + "Book title".PadRight(30) + " | " + "Book category".PadRight(25) + " | " + "Book available quantity".ToString().PadRight(3) );
+                Console.WriteLine("");
+                foreach (var book in listOfBooks)
+
+                {
+
+                    Console.WriteLine(book.BookId.ToString().PadRight(3) + " | " + book.AuthorFirstName.PadRight(20) + " | " + book.AuthorLastName.PadRight(20) + " | " + book.BooksTitle.PadRight(30) + " | " + book.BooksCategory.PadRight(25) + " | " + book.BooksAvailableQuantity.ToString().PadRight(3) );
+
+                }
+
                 Console.ReadLine();
                 return true;    
             }

@@ -15,6 +15,7 @@ namespace Library
         public int PhoneNumber { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public IList <Book> BorrowedBooks { get; set; }
 
         public User (string username, string password, string emailAddress, int phoneNumber, string firstName, string lastName)
         {

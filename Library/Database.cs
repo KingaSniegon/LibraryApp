@@ -27,18 +27,18 @@ namespace Library
 
         {
 
-            var Book1 = new Book(1, "George", "Martin", "A Game of Thrones", "Fantasy", 10);
-            var Book2 = new Book(2, "Agatha", "Christie", "Death on the Nile", "Thriller", 5);
-            var Book3 = new Book(3, "Balague", "Guillem", "Cristiano Ronaldo.Biography", "Biography", 5);
-            var Book4 = new Book(4, "Jan", "Brzechwa", "Akademia Pana Kleksa", "Children's literature", 15);
-            var Book5 = new Book(5, "Frank", "Herbert", "Dune", "Science fiction", 5);
+            var book1 = new Book(1, "George", "Martin", "A Game of Thrones", "Fantasy", 10);
+            var book2 = new Book(2, "Agatha", "Christie", "Death on the Nile", "Thriller", 5);
+            var book3 = new Book(3, "Balague", "Guillem", "Cristiano Ronaldo.Biography", "Biography", 5);
+            var book4 = new Book(4, "Jan", "Brzechwa", "Akademia Pana Kleksa", "Children's literature", 15);
+            var book5 = new Book(5, "Frank", "Herbert", "Dune", "Science fiction", 5);
 
             var books = new List<Book>();
-            books.Add(Book1);
-            books.Add(Book2); 
-            books.Add(Book3);
-            books.Add(Book4);
-            books.Add(Book5);
+            books.Add(book1);
+            books.Add(book2); 
+            books.Add(book3);
+            books.Add(book4);
+            books.Add(book5);
 
             return books;
         }

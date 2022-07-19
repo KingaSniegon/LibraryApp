@@ -8,7 +8,7 @@ namespace Library
 {
     public class Database
     {
-        public IDictionary<string, User> createuserdb()
+        public IDictionary<string, User> CreateUserDB()
         {
             var user1 = new User("LM", "LM", "l@m.pl", 123456789, "Lucyfer", "Morningstar");
             var user2 = new User("CD", "CD", "c@d.pl", 123456789, "Chloe", "Decker");

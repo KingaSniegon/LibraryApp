@@ -11,7 +11,7 @@ namespace Library
     {
 
         public DbSet<Book> Books { get; set; }
-        public DbSet<User> Users { get; set; }  
+        //public DbSet<User> Users { get; set; }  
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -40,32 +40,32 @@ namespace Library
                 .Property(c => c.BooksAvailableQuantity)
                 .HasColumnName("BooksAvailableQuantity");
 
-            builder.Entity<User>()
-                .ToTable("Users");
+            //builder.Entity<User>()
+            //    .ToTable("Users");
 
-            builder.Entity<User>()
-                .Property(c =>c.Username)
-                .HasColumnName("Username");
+            //builder.Entity<User>()
+            //    .Property(c =>c.Username)
+            //    .HasColumnName("Username");
 
-            builder.Entity<User>()
-                .Property(c =>c.Password)
-                .HasColumnName("Password");
+            //builder.Entity<User>()
+            //    .Property(c =>c.Password)
+            //    .HasColumnName("Password");
 
-            builder.Entity<User>()
-               .Property(c => c.EmailAddress)
-               .HasColumnName("EmailAddress");
+            //builder.Entity<User>()
+            //   .Property(c => c.EmailAddress)
+            //   .HasColumnName("EmailAddress");
 
-            builder.Entity<User>()
-             .Property(c => c.PhoneNumber)
-             .HasColumnName("PhoneNumber");
+            //builder.Entity<User>()
+            // .Property(c => c.PhoneNumber)
+            // .HasColumnName("PhoneNumber");
 
-            builder.Entity<User>()
-                .Property(c => c.FirstName)
-                .HasColumnName("FirstName");
+            //builder.Entity<User>()
+            //    .Property(c => c.FirstName)
+            //    .HasColumnName("FirstName");
 
-            builder.Entity<User>()
-                .Property(c => c.LastName)
-                .HasColumnName("LastName");
+            //builder.Entity<User>()
+            //    .Property(c => c.LastName)
+            //    .HasColumnName("LastName");
         }
 
 

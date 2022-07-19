@@ -66,6 +66,7 @@ namespace Library
         {
             if (selectedOption == "1")
             {
+               
                 ShowCatalog();
                 return true;
             }
@@ -101,7 +102,7 @@ namespace Library
                     Console.WriteLine("Enter correct number of options");
                     Console.Write("Select one of three options (enter 1, 2 or 3): ");
                     var selectedWrongOption = Console.ReadLine();
-                    OptionsMenu(selectedWrongOption,loggedUser);
+                    OptionsMenu(selectedWrongOption);
                     return true;
                 }
          
@@ -143,6 +144,8 @@ namespace Library
 
             
         }
+        
+
 
     }
   

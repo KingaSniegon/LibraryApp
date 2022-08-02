@@ -8,20 +8,20 @@ namespace Library
 {
     public class Database
     {
-        public IDictionary<string, User> CreateUserDB()
-        {
-            var user1 = new User("LM", "LM", "l@m.pl", 123456789, "Lucyfer", "Morningstar");
-            var user2 = new User("CD", "CD", "c@d.pl", 123456789, "Chloe", "Decker");
-            var user3 = new User("DE", "DE", "d@e.pl", 123456789, "Dan", "Espinoza");
+        //public IDictionary<string, User> GetUserDB()
+        //{
+        //    var user1 = new User("LM", "LM", "l@m.pl", 123456789, "Lucyfer", "Morningstar");
+        //    var user2 = new User("CD", "CD", "c@d.pl", 123456789, "Chloe", "Decker");
+        //    var user3 = new User("DE", "DE", "d@e.pl", 123456789, "Dan", "Espinoza");
 
-            var usersdictionary = new Dictionary<string, User>();
+        //    var usersdictionary = new Dictionary<string, User>();
 
-            usersdictionary.Add(user1.Username, user1);
-            usersdictionary.Add(user2.Username, user2);
-            usersdictionary.Add(user3.Username, user3);
+        //    usersdictionary.Add(user1.Username, user1);
+        //    usersdictionary.Add(user2.Username, user2);
+        //    usersdictionary.Add(user3.Username, user3);
 
-            return usersdictionary;
-        }
+        //    return usersdictionary;
+        //}
 
         //public ilist<book> createlistofbooks()
 
@@ -45,7 +45,7 @@ namespace Library
 
 
 
-        public IList<Book> CreateListofBooks()
+        public IList<Book> GetListofBooks()
         {
             try
             {
@@ -60,10 +60,30 @@ namespace Library
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw;
             }
 
 
+        }
+
+        public IList <User> GetUser(string username, string password)
+        {
+            try
+            {
+                using (var ctx  = new DbContext())
+                {
+                    var user = ctx.Users
+                        .Where(c => c.Username == username)
+                        .Where(c => c.Password == password)
+                        .ToArray();
+
+                    return user;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

@@ -117,7 +117,7 @@ namespace Library
 
 
             var database = new Database();
-            var listOfBooks = database.CreateListofBooks();
+            var listOfBooks = database.GetListofBooks();
 
             Console.WriteLine("ID".PadRight(3) + " | "
                 + "Author first name".PadRight(20) + " | "

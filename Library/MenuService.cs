@@ -11,23 +11,26 @@ namespace Library
         public void StartUp()
         {
             var identity = new IdentityService();
-            var isLoginCorrect = identity.LogIn();
             var isLogged = false;
             var returnMenu = false;
+            var isLoginCorrect = false;
 
+            var username = identity.LogIn();
+            if (username != null)
+            {
+                isLoginCorrect = true;
+            }
 
             do
-
             {
-                if (isLoginCorrect = true)
+                if (isLoginCorrect == true)
                 {
                     isLogged = true;
                     DisplayMenu();
                     Console.Write("Select one of the options: ");
                     var selectedOption = Console.ReadLine();
-
                     
-                    if (!OptionsMenu(selectedOption))
+                    if (!OptionsMenu(selectedOption,username))
                     {
                         isLogged = false;
                         isLoginCorrect = false;
@@ -35,17 +38,18 @@ namespace Library
                     else
                     {
                         returnMenu = true;
-              
                     }
-
-
-
                 }
                 else
                 {
                     Console.Clear();
                     Console.WriteLine("Username or password is incorrect. Please enter your credentials again");
-                    isLoginCorrect = identity.LogIn();
+
+                    username = identity.LogIn();
+                    if (username != null)
+                    {
+                        isLoginCorrect = true;
+                    }
                 }
             }
             while (isLogged == false || returnMenu == true);
@@ -56,13 +60,14 @@ namespace Library
             Console.Clear();
             Console.WriteLine("Hello in our Library!");
             Console.WriteLine("1.Book catalog");
-            Console.WriteLine("2.Your borrowed books");
+            Console.WriteLine("2.Borrow book");
             Console.WriteLine("3.Returns");
+            Console.WriteLine("4.Your borrowed books");
             Console.WriteLine("8.Sign Out");
 
         }
 
-        public bool OptionsMenu(string selectedOption)
+        public bool OptionsMenu(string selectedOption, string username)
         {
             if (selectedOption == "1")
             {
@@ -74,7 +79,8 @@ namespace Library
             {
                 //TO BE DONE
                 Console.Clear();
-                Console.WriteLine("Borrowed book");
+                Console.WriteLine("Borrow book");
+                BorrowBook(username);
                 Console.ReadLine();
                 return true;
             }
@@ -83,6 +89,14 @@ namespace Library
                 //TO BE DONE
                 Console.Clear();
                 Console.WriteLine("Return book");
+                return true;
+
+            }
+            else if (selectedOption == "4")
+            {
+                //TO BE DONE
+                Console.Clear();
+                Console.WriteLine("Borrowed books");
                 return true;
 
             }
@@ -102,7 +116,7 @@ namespace Library
                     Console.WriteLine("Enter correct number of options");
                     Console.Write("Select one of three options (enter 1, 2 or 3): ");
                     var selectedWrongOption = Console.ReadLine();
-                    OptionsMenu(selectedWrongOption);
+                    OptionsMenu(selectedWrongOption,username);
                     return true;
                 }
          
@@ -145,6 +159,20 @@ namespace Library
             
         }
         
+        private void BorrowBook(string username)
+        {
+            try
+            {
+                var database = new Database();
+                Console.Write("Enter book Id: ");
+                int bookId = int.Parse(Console.ReadLine());
+                database.InsertBorrowedBook(username,bookId);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
 
     }

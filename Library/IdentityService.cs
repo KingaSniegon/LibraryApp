@@ -8,10 +8,9 @@ namespace Library
 {
     public class IdentityService
     {
-        public bool LogIn()
+        public string LogIn()
         {
             var database = new Database();
-
            
             Console.Write("Enter you username: ");
             var username = Console.ReadLine();
@@ -20,8 +19,9 @@ namespace Library
 
             var users = database.GetUser(username, password);
 
+            return users[0].Username;
 
-            return false;
+            
         }
 
     }

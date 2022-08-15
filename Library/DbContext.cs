@@ -12,11 +12,29 @@ namespace Library
 
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<BorrowedBook> BorrowedBooks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
+            BooksContext(builder);
+            UsersContext(builder);
+            BorrowedBooksContext(builder);
+        
+        }
+
+
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlServer("Server=PL-CND71410SS\\MSSQLSERVER01;Database=Library;Integrated Security=True;");
+        }
+
+        public void BooksContext (ModelBuilder builder)
+        {
             builder.Entity<Book>()
                 .ToTable("Books");
 
@@ -39,9 +57,12 @@ namespace Library
             builder.Entity<Book>()
                 .Property(c => c.BooksAvailableQuantity)
                 .HasColumnName("BooksAvailableQuantity");
+        }
 
+        public void UsersContext(ModelBuilder builder)
+        {
             builder.Entity<User>()
-                .ToTable("Users");
+              .ToTable("Users");
 
             builder.Entity<User>()
                 .HasNoKey();
@@ -70,14 +91,24 @@ namespace Library
                 .Property(c => c.LastName)
                 .HasColumnName("LastName");
         }
-
-
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public void BorrowedBooksContext(ModelBuilder builder)
         {
-            base.OnConfiguring(optionsBuilder);
+            builder.Entity<BorrowedBook>()
+              .ToTable("BorrowedBooks");
 
-            optionsBuilder.UseSqlServer("Server=localhost;Database=Library;Integrated Security=True;");
+            builder.Entity<BorrowedBook>()
+                .HasKey("Username");
+
+            builder.Entity<BorrowedBook>()
+                .Property(c => c.Username)
+                .HasColumnName("Username");
+
+            builder.Entity<BorrowedBook>()
+                .Property(c => c.BorrowedBookId)
+                .HasColumnName("BorrowedBookId");
         }
+
+
+
     }
 }

@@ -77,7 +77,37 @@ namespace Library
                         .Where(c => c.Password == password)
                         .ToArray();
 
+
                     return user;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public void InsertBorrowedBook(string username, int bookId)
+        {
+            try
+            {
+                using (var ctx = new DbContext())
+                {
+
+                    BorrowedBook borrowedBook = new BorrowedBook(username, bookId);
+                    ctx.BorrowedBooks
+                        .Add(borrowedBook);
+
+                    var book = ctx.Books
+                        .Where(c => c.BookId == bookId)
+                        .FirstOrDefault();
+                    book.BooksAvailableQuantity = book.BooksAvailableQuantity - 1;
+
+                    ctx.Books
+                        .Update(book);
+
+                    ctx.SaveChanges();
+
                 }
             }
             catch (Exception ex)

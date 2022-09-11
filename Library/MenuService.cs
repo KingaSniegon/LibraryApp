@@ -14,9 +14,9 @@ namespace Library
             var isLogged = false;
             var returnMenu = false;
             var isLoginCorrect = false;
+            identity.LogIn();
 
-            var username = identity.LogIn();
-            if (username != null)
+            if (UserStaticData.Username != null)
             {
                 isLoginCorrect = true;
             }
@@ -30,7 +30,8 @@ namespace Library
                     Console.Write("Select one of the options: ");
                     var selectedOption = Console.ReadLine();
                     
-                    if (!OptionsMenu(selectedOption,username))
+                    
+                    if (!OptionsMenu(selectedOption))
                     {
                         isLogged = false;
                         isLoginCorrect = false;
@@ -45,8 +46,8 @@ namespace Library
                     Console.Clear();
                     Console.WriteLine("Username or password is incorrect. Please enter your credentials again");
 
-                    username = identity.LogIn();
-                    if (username != null)
+                    identity.LogIn();
+                    if (UserStaticData.Username != null)
                     {
                         isLoginCorrect = true;
                     }
@@ -67,8 +68,9 @@ namespace Library
 
         }
 
-        public bool OptionsMenu(string selectedOption, string username)
+        public bool OptionsMenu(string selectedOption)
         {
+            var database = new Database();
             if (selectedOption == "1")
             {
                
@@ -80,7 +82,7 @@ namespace Library
                 //TO BE DONE
                 Console.Clear();
                 Console.WriteLine("Borrow book");
-                BorrowBook(username);
+                BorrowBook(UserStaticData.Username);
                 Console.ReadLine();
                 return true;
             }
@@ -97,6 +99,8 @@ namespace Library
                 //TO BE DONE
                 Console.Clear();
                 Console.WriteLine("Borrowed books");
+                ShowBorrowedBooks();
+                Console.ReadLine();
                 return true;
 
             }
@@ -116,7 +120,7 @@ namespace Library
                     Console.WriteLine("Enter correct number of options");
                     Console.Write("Select one of three options (enter 1, 2 or 3): ");
                     var selectedWrongOption = Console.ReadLine();
-                    OptionsMenu(selectedWrongOption,username);
+                    OptionsMenu(selectedWrongOption);
                     return true;
                 }
          
@@ -172,6 +176,37 @@ namespace Library
             {
                 throw;
             }
+        }
+
+
+        private void ShowBorrowedBooks()
+        {
+            var database = new Database();
+            var idsOfBorrowedBooks = database.GetIdsOfBorrowedBooks();
+            var listOfBorrowedBooks = database.GetListOfBorrowedBooks(idsOfBorrowedBooks);
+
+            Console.WriteLine("ID".PadRight(3) + " | "
+                + "Author first name".PadRight(20) + " | "
+                + "Author last name".PadRight(20) + " | "
+                + "Book title".PadRight(30) + " | "
+                + "Book category".PadRight(25));
+
+            Console.WriteLine("");
+
+
+            foreach (var book in listOfBorrowedBooks)
+            {
+                Console.WriteLine(book.BookId.ToString().PadRight(3) + " | "
+                    + book.AuthorFirstName.PadRight(20) + " | "
+                    + book.AuthorLastName.PadRight(20) + " | "
+                    + book.BooksTitle.PadRight(30) + " | "
+                    + book.BooksCategory.PadRight(25));
+            }
+
+            Console.WriteLine("");
+            Console.Write("To return menu, enter 0: ");
+            var selectedNumber = Console.ReadLine();
+
         }
 
 

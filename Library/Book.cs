@@ -15,7 +15,7 @@ namespace Library
         public string BooksCategory { get; set; }
         public int BooksAvailableQuantity { get; set; }
 
-        public Book (int bookId, string authorFirstName, string authorLastName, string booksTitle, string booksCategory, int booksAvailableQuantity)
+        public Book(int bookId, string authorFirstName, string authorLastName, string booksTitle, string booksCategory, int booksAvailableQuantity)
 
         {
             BookId = bookId;
@@ -24,12 +24,7 @@ namespace Library
             BooksTitle = booksTitle;
             BooksCategory = booksCategory;
             BooksAvailableQuantity = booksAvailableQuantity;
-      
+
         }
-
-
-
-
     }
-
 }

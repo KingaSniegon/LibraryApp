@@ -114,6 +114,48 @@ namespace Library
             {
                 throw;
             }
+
+
         }
+        public int[] GetIdsOfBorrowedBooks()
+        {
+            try
+            {
+                using (var ctx = new DbContext())
+                {
+
+                    var idsOfBorrowedBooks = ctx.BorrowedBooks
+                        .Where(c => c.Username == UserStaticData.Username)
+                        .Select(c => c.BorrowedBookId)
+                        .ToArray();
+
+                    return idsOfBorrowedBooks;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public IList<Book> GetListOfBorrowedBooks(int[] idsOfBorrowedBooks)
+        {
+            try
+            {
+                using (var ctx = new DbContext())
+                {
+
+                    var listOfBorrowedBooks = ctx.Books
+                        .Where(c => idsOfBorrowedBooks.Contains(c.BookId))
+                        .ToArray();
+
+                    return listOfBorrowedBooks;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
     }
 }

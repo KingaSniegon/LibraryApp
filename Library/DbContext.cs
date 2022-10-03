@@ -97,9 +97,6 @@ namespace Library
               .ToTable("BorrowedBooks");
 
             builder.Entity<BorrowedBook>()
-                .HasKey("Username");
-
-            builder.Entity<BorrowedBook>()
                 .Property(c => c.Username)
                 .HasColumnName("Username");
 

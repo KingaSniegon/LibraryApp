@@ -62,7 +62,7 @@ namespace Library
             Console.WriteLine("Hello in our Library!");
             Console.WriteLine("1.Book catalog");
             Console.WriteLine("2.Borrow book");
-            Console.WriteLine("3.Returns");
+            Console.WriteLine("3.Return book");
             Console.WriteLine("4.Your borrowed books");
             Console.WriteLine("8.Sign Out");
 
@@ -73,33 +73,50 @@ namespace Library
             var database = new Database();
             if (selectedOption == "1")
             {
-               
-                ShowCatalog();
+                var listOfBooks = database.GetListofBooks();
+                ShowCatalog(listOfBooks);
+                Console.WriteLine("");
+                Console.Write("To return menu, enter 0: ");
+                Console.ReadLine();
                 return true;
             }
             else if (selectedOption == "2")
             {
-                //TO BE DONE
+                var listOfAvailableBooks = database.GetListOfAvailableBooks();
                 Console.Clear();
                 Console.WriteLine("Borrow book");
+                ShowCatalog(listOfAvailableBooks);
                 BorrowBook(UserStaticData.Username);
                 Console.ReadLine();
                 return true;
             }
             else if (selectedOption == "3")
             {
-                //TO BE DONE
                 Console.Clear();
-                Console.WriteLine("Return book");
+                ShowBorrowedBooks();
+                Console.WriteLine("");
+                Console.Write("To return to menu, enter 0. To return book, enter id of book: ");
+                var bookToReturn = int.Parse(Console.ReadLine());
+                if (bookToReturn == 0)
+                {
+                    return true;
+                }
+                if (bookToReturn != null)
+                {
+                    database.DeleteBorrowedBook(bookToReturn);
+                }
                 return true;
 
             }
             else if (selectedOption == "4")
             {
-                //TO BE DONE
+               
                 Console.Clear();
                 Console.WriteLine("Borrowed books");
                 ShowBorrowedBooks();
+                Console.WriteLine("");
+                Console.Write("To return menu, enter 0: ");
+                var selectedNumber = Console.ReadLine();
                 Console.ReadLine();
                 return true;
 
@@ -127,16 +144,10 @@ namespace Library
            
             
         }
-        public void ShowCatalog ()
+        public void ShowCatalog (IList<Book> listOfBooks)
         {
 
-
             Console.Clear();
-
-
-            var database = new Database();
-            var listOfBooks = database.GetListofBooks();
-
             Console.WriteLine("ID".PadRight(3) + " | "
                 + "Author first name".PadRight(20) + " | "
                 + "Author last name".PadRight(20) + " | "
@@ -156,11 +167,6 @@ namespace Library
                     + book.BooksAvailableQuantity.ToString().PadRight(3));
             }
 
-            Console.WriteLine("");
-            Console.Write("To return menu, enter 0: ");
-            var selectedNumber = Console.ReadLine();
-
-            
         }
         
         private void BorrowBook(string username)
@@ -168,7 +174,8 @@ namespace Library
             try
             {
                 var database = new Database();
-                Console.Write("Enter book Id: ");
+                Console.WriteLine("");
+                Console.Write("To borrow book, enter id of selected book: ");
                 int bookId = int.Parse(Console.ReadLine());
                 database.InsertBorrowedBook(username,bookId);
             }
@@ -202,10 +209,6 @@ namespace Library
                     + book.BooksTitle.PadRight(30) + " | "
                     + book.BooksCategory.PadRight(25));
             }
-
-            Console.WriteLine("");
-            Console.Write("To return menu, enter 0: ");
-            var selectedNumber = Console.ReadLine();
 
         }
 

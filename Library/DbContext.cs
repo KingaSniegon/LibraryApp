@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +19,6 @@ namespace Library
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
             BooksContext(builder);
             UsersContext(builder);
             BorrowedBooksContext(builder);
@@ -56,7 +57,8 @@ namespace Library
 
             builder.Entity<Book>()
                 .Property(c => c.BooksAvailableQuantity)
-                .HasColumnName("BooksAvailableQuantity");
+            .HasColumnName("BooksAvailableQuantity");
+
         }
 
         public void UsersContext(ModelBuilder builder)
@@ -97,12 +99,27 @@ namespace Library
               .ToTable("BorrowedBooks");
 
             builder.Entity<BorrowedBook>()
+                .Property(c => c.Id)
+                .HasColumnName("Id");
+
+            builder.Entity<BorrowedBook>()
                 .Property(c => c.Username)
                 .HasColumnName("Username");
 
             builder.Entity<BorrowedBook>()
                 .Property(c => c.BorrowedBookId)
                 .HasColumnName("BorrowedBookId");
+            
+            builder.Entity<BorrowedBook>()
+                .HasKey("Id");
+
+            builder.Entity<BorrowedBook>()
+               .HasOne(c => c.Book)
+               .WithMany(c => c.BorrowedBooks)
+               .HasForeignKey (c => c.BorrowedBookId)
+               .HasConstraintName("FK_BorrowedBook_Book")
+               .IsRequired();
+               
         }
 
 

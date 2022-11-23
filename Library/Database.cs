@@ -103,19 +103,21 @@ namespace Library
 
 
         }
-        public int[] GetIdsOfBorrowedBooks()
+        public Book[] GetIdsOfBorrowedBooks()
         {
             try
             {
                 using (var ctx = new DbContext())
                 {
 
-                    var idsOfBorrowedBooks = ctx.BorrowedBooks
+                    var listOfBorrowedBooks = ctx.BorrowedBooks
                         .Where(c => c.Username == UserStaticData.Username)
-                        .Select(c => c.BorrowedBookId)
+                        .Select(c => c.Book)
                         .ToArray();
 
-                    return idsOfBorrowedBooks;
+                   
+
+                    return listOfBorrowedBooks;
                 }
             }
             catch (Exception ex)

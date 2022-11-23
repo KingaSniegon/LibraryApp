@@ -14,6 +14,8 @@ namespace Library
         public string BooksTitle { get; set; }
         public string BooksCategory { get; set; }
         public int BooksAvailableQuantity { get; set; }
+        public ICollection<BorrowedBook> BorrowedBooks { get; set; }
+
 
         public Book(int bookId, string authorFirstName, string authorLastName, string booksTitle, string booksCategory, int booksAvailableQuantity)
 

@@ -11,21 +11,15 @@ namespace Library
         public void StartUp()
         {
             var identity = new IdentityService();
-            var isLogged = false;
             var returnMenu = false;
-            var isLoginCorrect = false;
             identity.LogIn();
 
-            if (UserStaticData.Username != null)
-            {
-                isLoginCorrect = true;
-            }
 
             do
             {
-                if (isLoginCorrect == true)
+                if (UserStaticData.Username != null)
                 {
-                    isLogged = true;
+                    
                     DisplayMenu();
                     Console.Write("Select one of the options: ");
                     var selectedOption = Console.ReadLine();
@@ -33,8 +27,8 @@ namespace Library
                     
                     if (!OptionsMenu(selectedOption))
                     {
-                        isLogged = false;
-                        isLoginCorrect = false;
+
+                        UserStaticData.Username = null;
                     }
                     else
                     {
@@ -47,13 +41,9 @@ namespace Library
                     Console.WriteLine("Username or password is incorrect. Please enter your credentials again");
 
                     identity.LogIn();
-                    if (UserStaticData.Username != null)
-                    {
-                        isLoginCorrect = true;
-                    }
                 }
             }
-            while (isLogged == false || returnMenu == true);
+            while (returnMenu == true);
         }
 
         public void DisplayMenu ()
@@ -135,7 +125,7 @@ namespace Library
                 {
 
                     Console.WriteLine("Enter correct number of options");
-                    Console.Write("Select one of three options (enter 1, 2 or 3): ");
+                    Console.Write("Select one of three options (enter 1, 2, 3, 4 or 8): ");
                     var selectedWrongOption = Console.ReadLine();
                     OptionsMenu(selectedWrongOption);
                     return true;
@@ -189,8 +179,8 @@ namespace Library
         private void ShowBorrowedBooks()
         {
             var database = new Database();
-            var idsOfBorrowedBooks = database.GetIdsOfBorrowedBooks();
-            var listOfBorrowedBooks = database.GetListOfBorrowedBooks(idsOfBorrowedBooks);
+            var listOfBorrowedBooks = database.GetIdsOfBorrowedBooks();
+            
 
             Console.WriteLine("ID".PadRight(3) + " | "
                 + "Author first name".PadRight(20) + " | "
